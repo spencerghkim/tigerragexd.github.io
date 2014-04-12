@@ -137,6 +137,11 @@ function update() {
         player.body.velocity.y = -350;
     }*/
 
+    if(star.position.x > 100 && star.position.x < 120){
+    	//move up
+    	star.body.velocity.y = 30;
+    }
+
 }
 
 function collectStar (player, star) {
@@ -145,10 +150,10 @@ function collectStar (player, star) {
     star.kill();
 
     //  Create a star inside of the 'stars' group
-        var star = stars.create( 20, 295, 'star');
+    var star = stars.create( 20, 295, 'star');
 
-        //  Let gravity do its thing
-        star.body.velocity.x = 100;
+    //  Let gravity do its thing
+    star.body.velocity.x = 100;
 
 }
 
