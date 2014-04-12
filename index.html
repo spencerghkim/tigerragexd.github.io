@@ -78,7 +78,7 @@ function create() {
     {
         //  Create a star inside of the 'stars' group
         var star = stars.create(i * (750/400) + getRandomInt(1,9), 295+getRandomInt(-15,15), 'star');
-        star.scale.setTo(.25,.25)
+        star.scale.setTo(.38,.38)
         star.body.velocity.x = 100+getRandomInt(1,10);
         star.state = "right";
         star.mode = "none";
@@ -95,7 +95,7 @@ function create() {
 
 function update() {
     game.physics.arcade.collide(player, platforms);
-    game.physics.arcade.overlap(player, stars, killStar, null, this);
+    game.physics.arcade.overlap(player, stars, checkKillStar, null, this);
 
     for(var i=0; i<stars.children.length; i++){
 		checkLibrary(stars.children[i]);
@@ -107,7 +107,7 @@ function update() {
 }
 
 function checkLibrary(star){
-	if(star.x == 100 && star.state == "right"){
+	if(star.x == 100+getRandomInt(-5,5) && star.state == "right"){
 		if(getRandomInt(0,1000) > 900){
 		    star.body.velocity.x = 0;
 		    star.body.velocity.y = 50;
@@ -135,7 +135,7 @@ function checkLibrary(star){
 }
 
 function checkCoffee(star){
-	if(star.x == 200 && star.state == "right"){
+	if(star.x == 200+getRandomInt(-5,5) && star.state == "right"){
 		if(getRandomInt(0,1000) > 500){
 		    star.body.velocity.x = 0;
 		    star.body.velocity.y = -100;
@@ -163,7 +163,7 @@ function checkCoffee(star){
 }
 
 function checkHotel(star){
-	if(star.x == 500 && star.state == "right"){
+	if(star.x == 500+getRandomInt(-5,5) && star.state == "right"){
 		if(getRandomInt(0,1000) > 800){
 		    star.body.velocity.x = 0;
 		    star.body.velocity.y = 45;
@@ -191,7 +191,7 @@ function checkHotel(star){
 }
 
 function checkAirport(star){
-	if(star.x == 600 && star.state == "right"){
+	if(star.x == 600+getRandomInt(-5,5) && star.state == "right"){
 		if(getRandomInt(0,1000) > 750){
 		    star.body.velocity.x = 0;
 		    star.body.velocity.y = -300;
@@ -218,14 +218,11 @@ function checkAirport(star){
 	}
 }
 
-function killStar (player, star) {
-	star.x = 20+getRandomInt(1,9);
-	star.body.velocity.x = 100;
-
-	/*var star = stars.create(20 + getRandomInt(1,9), 295+getRandomInt(-15,15), 'star');
-        star.body.velocity.x = 100+getRandomInt(1,10);
-        star.state = "right";
-        star.mode = "none";*/
+function checkKillStar (star) {
+	if(star.x > 770){
+		star.x = 20+getRandomInt(1,9);
+		star.body.velocity.x = 100;
+	}
 }
 
 function getRandomInt(min, max) {
