@@ -65,18 +65,12 @@ function create() {
     ledge.scale.setTo(2, 1);
     ledge.body.immovable = true;
 
-    // The player and its settings
-    // player = game.add.sprite(770, 280, 'dude');
-    // game.physics.arcade.enable(player);
-
 
     stars = game.add.group();
-
     stars.enableBody = true;
 
     for (var i = 0; i < 400; i++)
     {
-        //  Create a star inside of the 'stars' group
         var star = stars.create(i * (750/400) + getRandomInt(1,9), 295+getRandomInt(-15,15), 'star');
         star.scale.setTo(.30,.30)
         star.body.velocity.x = 100+getRandomInt(1,10);
@@ -84,18 +78,9 @@ function create() {
         star.mode = "none";
     }
 
-    library = game.add.group();
-    library.enableBody = true;
-    library.create(100, 295, 'library');
-    libraryPixel = game.add.group();
-    libraryPixel.enableBody = true;
-    libraryPixel.create(100, 295, 'pixel');
-    
 }
 
 function update() {
-    // game.physics.arcade.collide(player, platforms);
-    // game.physics.arcade.overlap(player, stars, checkKillStar, null, this);
 
     for(var i=0; i<stars.children.length; i++){
 		checkLibrary(stars.children[i]);
