@@ -86,10 +86,10 @@ function create() {
     stars.enableBody = true;
 
     //  Here we'll create 12 of them evenly spaced apart
-    for (var i = 0; i < 12; i++)
+    for (var i = 0; i < 30; i++)
     {
         //  Create a star inside of the 'stars' group
-        var star = stars.create(i * 60, 295, 'star');
+        var star = stars.create(i * 10, 295, 'star');
         //  Let gravity do its thing
         star.body.velocity.x = 100;
 
@@ -111,47 +111,15 @@ function update() {
     game.physics.arcade.collide(stars, platforms);
 
 
-    //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
-    game.physics.arcade.overlap(player, stars, collectStar, null, this);
+    //  Checks to see if the player overlaps with any of the stars, if he does call the killStar function
+    game.physics.arcade.overlap(player, stars, killStar, null, this);
     game.physics.arcade.overlap(libraryPixel, stars, goLibrary, null, this);
-
-
-    //  Reset the players velocity (movement)
-    /*player.body.velocity.x = 0;
-
-    if (cursors.left.isDown)
-    {
-        //  Move to the left
-        player.body.velocity.x = -150;
-
-        player.animations.play('left');
-    }
-    else if (cursors.right.isDown)
-    {
-        //  Move to the right
-        player.body.velocity.x = 150;
-
-        player.animations.play('right');
-    }
-    else
-    {
-        //  Stand still
-        player.animations.stop();
-
-        player.frame = 4;
-    }
-    
-    //  Allow the player to jump if they are touching the ground.
-    if (cursors.up.isDown && player.body.touching.down)
-    {
-        player.body.velocity.y = -350;
-    }*/
 
 
 
 }
 
-function collectStar (player, star) {
+function killStar (player, star) {
     star.kill();
     var star = stars.create( 20, 295, 'star');
     star.body.velocity.x = 100;
@@ -159,7 +127,8 @@ function collectStar (player, star) {
 
 
 function goLibrary (libraryPixel, star) {
-    if(getRandomInt(0,1000) > 900){
+    if(getRandomInt(0,1000) > 980){
+	    var time = 
 	    star.body.velocity.x = 0;
 	    star.body.velocity.y = 50;
 	}
