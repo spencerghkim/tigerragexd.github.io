@@ -136,6 +136,8 @@ function update() {
 		if(stars.children[i].y <= 300 && stars.children[i].state=="up"){
 			stars.children[i].state="right";
 			stars.children[i].body.velocity.x = 100;
+			stars.children[i].body.velocity.y = 0;
+
 		}
 	}
 
