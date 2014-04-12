@@ -98,6 +98,8 @@ function update() {
     for(var i=0; i<stars.children.length; i++){
 		checkLibrary(stars.children[i]);
 		checkCoffee(stars.children[i]);
+		checkHotel(stars.children[i]);
+
 	}
 
 }
@@ -132,7 +134,7 @@ function checkLibrary(star){
 
 function checkCoffee(star){
 	if(star.x == 200 && star.state == "right"){
-		if(getRandomInt(0,1000) > 700){
+		if(getRandomInt(0,1000) > 500){
 		    star.body.velocity.x = 0;
 		    star.body.velocity.y = -100;
 			star.state = "upCoff";
@@ -151,6 +153,34 @@ function checkCoffee(star){
 		star.tickCount++;
 	}
 	if(star.y >= 300 && star.state=="downCoff"){
+		star.state="right";
+		star.body.velocity.x = 100+getRandomInt(1,10);
+		star.body.velocity.y = 0;
+		star.y = 295+getRandomInt(-15,15);
+	}
+}
+
+function checkHotel(star){
+	if(star.x == 500 && star.state == "right"){
+		if(getRandomInt(0,1000) > 800){
+		    star.body.velocity.x = 0;
+		    star.body.velocity.y = 45;
+			star.state = "downHot";
+		}
+	}
+	if(star.y >= 400 && star.state == "downHot"){
+		star.body.velocity.y = 0;
+		star.state = "stopHot";
+		star.tickCount = 0;
+	}
+	if(star.state=="stopHot"){
+		if(star.tickCount > 500){
+			star.body.velocity.y = -45;
+			star.state = "upHot";
+		}
+		star.tickCount++;
+	}
+	if(star.y <= 300 && star.state=="upHot"){
 		star.state="right";
 		star.body.velocity.x = 100+getRandomInt(1,10);
 		star.body.velocity.y = 0;
