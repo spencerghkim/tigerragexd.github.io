@@ -188,6 +188,33 @@ function checkHotel(star){
 	}
 }
 
+function checkAirport(star){
+	if(star.x == 600 && star.state == "right"){
+		if(getRandomInt(0,1000) > 750){
+		    star.body.velocity.x = 0;
+		    star.body.velocity.y = -300;
+			star.state = "upAir";
+		}
+	}
+	if(star.y <= 120 && star.state == "upAir"){
+		star.body.velocity.y = 0;
+		star.state = "stopAir";
+		star.tickCount = 0;
+	}
+	if(star.state=="stopAir"){
+		if(star.tickCount > 220){
+			star.body.velocity.y = 140;
+			star.state = "downAir";
+		}
+		star.tickCount++;
+	}
+	if(star.y >= 300 && star.state=="downAir"){
+		star.state="right";
+		star.body.velocity.x = 100+getRandomInt(1,10);
+		star.body.velocity.y = 0;
+		star.y = 295+getRandomInt(-15,15);
+	}
+}
 
 function killStar (player, star) {
 	star.x = 20+getRandomInt(1,9);
