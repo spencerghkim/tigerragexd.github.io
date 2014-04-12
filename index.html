@@ -115,10 +115,11 @@ function update() {
 
 
     for(var i=0; i<stars.children.length; i++){
-		if(stars.children[i].x == 100){
+		goLibrary(stars.children[i]);
+		/*if(stars.children[i].x == 100){
 			stars.children[i].body.velocity.x = 0;
 			stars.children[i].body.velocity.y = 50;
-		}
+		}*/
 	}
 
 }
@@ -131,11 +132,11 @@ function killStar (player, star) {
 }
 
 
-function goLibrary (libraryPixel, star) {
-    /*if(getRandomInt(0,1000) > 980){
+function goLibrary (star) {
+    if(getRandomInt(0,1000) > 980){
 	    star.body.velocity.x = 0;
 	    star.body.velocity.y = 50;
-	}*/
+	}
 }
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
