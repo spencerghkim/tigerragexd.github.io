@@ -115,11 +115,9 @@ function update() {
 
 
     for(var i=0; i<stars.children.length; i++){
-		goLibrary(stars.children[i]);
-		/*if(stars.children[i].x == 100){
-			stars.children[i].body.velocity.x = 0;
-			stars.children[i].body.velocity.y = 50;
-		}*/
+		if(stars.children[i].x == 100){
+			goLibrary(stars.children[i]);
+		}
 	}
 
 }
