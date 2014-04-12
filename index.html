@@ -84,7 +84,6 @@ function create() {
 
     stars.enableBody = true;
 
-    //  Here we'll create 12 of them evenly spaced apart
     for (var i = 0; i < 400; i++)
     {
         //  Create a star inside of the 'stars' group
@@ -105,42 +104,39 @@ function create() {
 
 function update() {
 
-    //  Collide the player and the stars with the platforms
     game.physics.arcade.collide(player, platforms);
-    // game.physics.arcade.collide(stars, platforms);
 
-
-    //  Checks to see if the player overlaps with any of the stars, if he does call the killStar function
     game.physics.arcade.overlap(player, stars, killStar, null, this);
-    // game.physics.arcade.overlap(libraryPixel, stars, goLibrary, null, this);
 
 
     for(var i=0; i<stars.children.length; i++){
-		if(stars.children[i].x == 100 && stars.children[i].state == "right"){
-			goLibrary(stars.children[i]);
-			stars.children[i].state = "down";
-		}
-		if(stars.children[i].y >= 500 && stars.children[i].state == "down"){
-			stars.children[i].body.velocity.y = 0;
-			stars.children[i].state = "stop";
-			stars.children[i].tickCount = 0;
-		}
-
-		if(stars.children[i].state=="stop"){
-			if(stars.children[i].tickCount > 200){
-				stars.children[i].body.velocity.y = -50;
-				stars.children[i].state = "up";
-			}
-			stars.children[i].tickCount++;
-		}
-		if(stars.children[i].y <= 300 && stars.children[i].state=="up"){
-			stars.children[i].state="right";
-			stars.children[i].body.velocity.x = 100;
-			stars.children[i].body.velocity.y = 0;
-
-		}
+		checkLibrary(stars.children[i]);
 	}
 
+}
+
+function checkLibrary(star){
+	if(star.x == 100 && star.state == "right"){
+		goLibrary(star);
+		star.state = "down";
+	}
+	if(star.y >= 500 && star.state == "down"){
+		star.body.velocity.y = 0;
+		star.state = "stop";
+		star.tickCount = 0;
+	}
+	if(star.state=="stop"){
+		if(star.tickCount > 200){
+			star.body.velocity.y = -50;
+			star.state = "up";
+		}
+		star.tickCount++;
+	}
+	if(star.y <= 300 && star.state=="up"){
+		star.state="right";
+		star.body.velocity.x = 100;
+		star.body.velocity.y = 0;
+	}
 }
 
 function killStar (player, star) {
