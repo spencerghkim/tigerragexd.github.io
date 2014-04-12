@@ -66,9 +66,9 @@ function create() {
     ledge.body.immovable = true;
 
     // The player and its settings
-    player = game.add.sprite(770, 280, 'dude');
+    // player = game.add.sprite(770, 280, 'dude');
+    // game.physics.arcade.enable(player);
 
-    game.physics.arcade.enable(player);
 
     stars = game.add.group();
 
@@ -94,14 +94,15 @@ function create() {
 }
 
 function update() {
-    game.physics.arcade.collide(player, platforms);
-    game.physics.arcade.overlap(player, stars, checkKillStar, null, this);
+    // game.physics.arcade.collide(player, platforms);
+    // game.physics.arcade.overlap(player, stars, checkKillStar, null, this);
 
     for(var i=0; i<stars.children.length; i++){
 		checkLibrary(stars.children[i]);
 		checkCoffee(stars.children[i]);
 		checkHotel(stars.children[i]);
 		checkAirport(stars.children[i]);
+		checkKillStar(stars.children[i]);
 	}
 
 }
