@@ -134,16 +134,10 @@ function update() {
 			stars.children[i].tickCount++;
 		}
 		if(stars.children[i].y >= 400 && stars.children[i].state=="up"){
-			stars.children[i].state=="right";
+			stars.children[i].state="right";
 			stars.children[i].body.velocity.x = 100;
 		}
 	}
-
-	for(var i=0; i<stars.children.length; i++){
-		
-	}
-
-	
 
 }
 
