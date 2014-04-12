@@ -33,6 +33,7 @@ var platforms;
 var cursors;
 
 var stars;
+var starPixels;
 
 var library;
 var libraryPixel;
@@ -82,16 +83,17 @@ function create() {
 
     //  Finally some stars to collect
     stars = game.add.group();
+    starPixels = game.add.group();
 
-    //  We will enable physics for any star that is created in this group
     stars.enableBody = true;
+    starPixels.enableBody = true;
 
     //  Here we'll create 12 of them evenly spaced apart
     for (var i = 0; i < 12; i++)
     {
         //  Create a star inside of the 'stars' group
         var star = stars.create(i * 60, 295, 'star');
-
+        var starPixel = starPixels.create(i * 60, 295, 'pixel');
         //  Let gravity do its thing
         star.body.velocity.x = 100;
 
@@ -112,9 +114,12 @@ function update() {
     game.physics.arcade.collide(player, platforms);
     game.physics.arcade.collide(stars, platforms);
 
+
     //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
     game.physics.arcade.overlap(player, stars, collectStar, null, this);
-    game.physics.arcade.overlap(libraryPixel, stars, goLibrary, null, this);
+    game.physics.arcade.overlap(libraryPixel, starPixel, goLibrary, null, this);
+    game.physics.arcade.overlap(starPixel, player, killStarPixel, null, this);
+
 
     //  Reset the players velocity (movement)
     /*player.body.velocity.x = 0;
@@ -152,24 +157,23 @@ function update() {
 }
 
 function collectStar (player, star) {
-    
-    // Removes the star from the screen
     star.kill();
-
-    //  Create a star inside of the 'stars' group
     var star = stars.create( 20, 295, 'star');
-
-    //  Let gravity do its thing
     star.body.velocity.x = 100;
-
 }
+
+function killStarPixel (player, starPixel) {
+    starPixel.kill();
+    var starPixel = starPixels.create( 20, 295, 'pixel');
+    star.body.velocity.x = 100;
+}
+
 
 function goLibrary (libraryPixel, star) {
     if(getRandomInt(0,1000) > 900){
 	    star.body.velocity.x = 0;
 	    star.body.velocity.y = 50;
 	}
-
 }
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
