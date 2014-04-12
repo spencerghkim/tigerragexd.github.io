@@ -88,7 +88,7 @@ function create() {
     for (var i = 0; i < 60; i++)
     {
         //  Create a star inside of the 'stars' group
-        var star = stars.create(i * 10 + getRandomInt(1,9), 295, 'star');
+        var star = stars.create(i * 10 + getRandomInt(1,9), 295+getRandomInt(-2,2), 'star');
         star.body.velocity.x = 100;
         star.state = "right";
 
@@ -150,7 +150,7 @@ function killStar (player, star) {
 
 
 function goLibrary (star) {
-    if(getRandomInt(0,1000) > 980){
+    if(getRandomInt(0,1000) > 900){
 	    star.body.velocity.x = 0;
 	    star.body.velocity.y = 50;
 	}
