@@ -163,7 +163,7 @@ function killStar (player, star) {
 	star.x = 20+getRandomInt(1,9);
 	star.body.velocity.x = 100;
 
-	var star = stars.create(i * (750/400) + getRandomInt(1,9), 295+getRandomInt(-15,15), 'star');
+	var star = stars.create(20 + getRandomInt(1,9), 295+getRandomInt(-15,15), 'star');
         star.body.velocity.x = 100+getRandomInt(1,10);
         star.state = "right";
         star.mode = "none";
