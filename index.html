@@ -88,7 +88,7 @@ function create() {
         // star.body.bounce.y = 0.7 + Math.random() * 0.2;
     }
 
-    var wtf = stars.create(770, 290, 'star');
+    var wtf = stars.create(770, 295, 'star');
 
     //  Our controls.
     cursors = game.input.keyboard.createCursorKeys();
@@ -100,12 +100,12 @@ function update() {
     //  Collide the player and the stars with the platforms
     game.physics.arcade.collide(stars, platforms);
 
-    game.physics.arcade.overlap(wall, stars, collectStar, null, this);
+    game.physics.arcade.overlap(stars, stars, collectStar, null, this);
 
     
 }
 
-function collectStar (wall, star) {
+function collectStar (wtf, star) {
     
     // Removes the star from the screen
     star.kill();
