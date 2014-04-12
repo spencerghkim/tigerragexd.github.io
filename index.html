@@ -117,8 +117,8 @@ function update() {
 
     //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
     game.physics.arcade.overlap(player, stars, collectStar, null, this);
-    game.physics.arcade.overlap(libraryPixel, starPixel, goLibrary, null, this);
-    game.physics.arcade.overlap(starPixel, player, killStarPixel, null, this);
+    game.physics.arcade.overlap(libraryPixel, starPixels, goLibrary, null, this);
+    game.physics.arcade.overlap(starPixels, player, killStarPixel, null, this);
 
 
     //  Reset the players velocity (movement)
