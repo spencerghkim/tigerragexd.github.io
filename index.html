@@ -161,7 +161,7 @@ function collectStar (player, star) {
 
 function goLibrary (library, star) {
     
-    //  Let gravity do its thing
+    star.body.velocity.x = 0;
     star.body.velocity.y = 20;
 
 }
