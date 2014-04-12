@@ -160,10 +160,14 @@ function collectStar (player, star) {
 }
 
 function goLibrary (library, star) {
-    
-    star.body.velocity.x = 0;
-    star.body.velocity.y = 20;
+    if(getRandomInt(0,100) > 80){
+	    star.body.velocity.x = 0;
+	    star.body.velocity.y = 20;
+	}
 
+}
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 </script>
 
