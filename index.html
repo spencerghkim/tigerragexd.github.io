@@ -57,7 +57,7 @@ function create() {
 
     //  Now let's create two ledges
     var ledge = platforms.create(0, 300, 'ground');
-    ground.scale.setTo(2, 1);
+    ledge.scale.setTo(2, 1);
     ledge.body.immovable = true;
 
     // The player and its settings
@@ -85,7 +85,7 @@ function create() {
     for (var i = 0; i < 12; i++)
     {
         //  Create a star inside of the 'stars' group
-        var star = stars.create(i * 70, 0, 'star');
+        var star = stars.create(i * 60, 295, 'star');
 
         //  Let gravity do its thing
         star.body.velocity.x = 100;
