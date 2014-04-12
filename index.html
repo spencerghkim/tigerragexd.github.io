@@ -120,7 +120,7 @@ function update() {
 			goLibrary(stars.children[i]);
 			stars.children[i].state = "down";
 		}
-		if(stars.children[i].y >= 500 && stars.children[i].state = "down"){
+		if(stars.children[i].y >= 500 && stars.children[i].state == "down"){
 			stars.children[i].body.velocity.y = 0;
 			stars.children[i].state = "stop";
 			stars.children[i].tickCount = 0;
