@@ -1,21 +1,25 @@
 
 var textGroup;
+var money = 0; //for demo
 window.onload = function() {
 
 var game = new Phaser.Game(1280, 720, Phaser.CANVAS, 'phaser-example', { preload: preload, create: create, update: update });
 
-
-var money = 0;
+// var money = 0; 
 var moneyText;
 var cursors;
 var stars;
 var everythingElseGroup;
 var libraryHackButton;
 var libraryFlavorText;
+var coffeeHackButton;
 var libCompUpgradeButton;
 var differentAccountTypes = ["Facebook", "Email", "Amazon", "Bank"];
 
+var fox;
+
 var libHackingLevel = 1;
+var globalHackingLevel = 1;
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -79,10 +83,6 @@ function create() {
     airport.scale.setTo(.8,.7);
     everythingElseGroup.add(airport);
     
-    var fox = game.add.image(1080, 523, 'fox'); 
-    fox.scale.setTo(.25,.25);
-    everythingElseGroup.add(fox);
-    
 
 
     var libText = game.add.text(100 + 140, 600, "Shady Computer", {font: "20px Arial", align: "center"});
@@ -95,11 +95,21 @@ function create() {
     libraryFlavorText = game.add.text(libraryHackButton.x + 50, libraryHackButton.y + 200, "Facebook account stolen!");
     everythingElseGroup.add(libraryFlavorText);
     libraryFlavorText.visible = false;
-    
 
-    libCompUpgradeButton = game.add.button(0, 0, 'upgrade', buttonClick, this);
-    everythingElseGroup.add(libCompUpgradeButton);
+    coffeeHackButton = game.add.button(610, 500, 'button', buttonClickCoffee, this);
+    coffeeHackButton.visible = false;
+    coffeeHackButton.clickable = false;
+    everythingElseGroup.add(coffeeHackButton);
     
+    libCompUpgradeButton = game.add.button(0, 0, 'upgrade', buttonClickUpgrade, this);
+    everythingElseGroup.add(libCompUpgradeButton);
+
+    coffeeUpgradeButton = game.add.button(0, 61, 'upgrade', getCoffeeButton, this);
+    everythingElseGroup.add(coffeeUpgradeButton);
+
+    fox = game.add.button(1080, 523, 'fox', foxClick, this); 
+    fox.scale.setTo(.25,.25);
+    everythingElseGroup.add(fox);
     
     everythingElseGroup.add(ledge);
 
@@ -123,6 +133,41 @@ function create() {
     stars.scale.x = stars.scale.y = .9;   
 }
 
+function buttonClickUpgrade(){
+    if(money >= 100*libHackingLevel){
+        
+        libraryFlavorText.text = "Spent $" +(100*libHackingLevel) + " to upgrade library hacking level to " + (libHackingLevel+1)+".\nMore users might get hacked.";
+        libraryFlavorText.visible = true;
+        money -= 100*libHackingLevel;
+        moneyText.text = "$" + money;
+        libHackingLevel += 1;
+    }
+    else{
+        libraryFlavorText.text = "Not enough money; need $" + (100*libHackingLevel) + " to upgrade library hacking level.";
+        libraryFlavorText.visible = true;
+    }
+    libCompUpgradeButton.count = 20;
+}
+
+function getCoffeeButton(){
+    if(money >= 1000){
+        
+        libraryFlavorText.text = "Spent $1000 to place untrusted computer at cafe.";
+        libraryFlavorText.visible = true;
+        money -= 1000;
+        moneyText.text = "$" + money;
+
+        coffeeUpgradeButton.visible = false;
+
+    }
+    else{
+        libraryFlavorText.text = "Not enough money; need $1000 to expand to cafe.";
+        libraryFlavorText.visible = true;
+    }
+    coffeeUpgradeButton.count = 20;
+
+}
+
 function buttonClick() {
     if (libraryHackButton.clickable){
         var accType = getRandomInt(1, 10);
@@ -144,11 +189,28 @@ function buttonClick() {
         libraryHackButton.clickable = false;
         libraryHackButton.visible = false;
         libraryFlavorText.visible = true;
+
 	}
 }
 
+function buttonClickCoffee(){
+    if(coffeeHackButton.clickable==true){
+        var value = 50;
+        money += value;
+        moneyText.text = "$" + money;
+        libraryFlavorText.text += " account stolen! $" + value + " added to your account.";
+        coffeeHackButton.clickable=false;
+        coffeeHackButton.visible = false;
+    }
+}
+
+function foxClick(){
+    money += 1;
+    moneyText.text = "$" + money;
+}
+
 function update() {
-	if (libraryHackButton.nextVisible >= 60){
+    if (libraryHackButton.nextVisible >= 60){
 		libraryHackButton.nextVisible--;
 	} else if (libraryHackButton.nextVisible < 60 && libraryHackButton.nextVisible > 0) {
 		libraryHackButton.alpha -= 1/60;
@@ -159,6 +221,16 @@ function update() {
 		libraryFlavorText.visible = false;
 		libraryHackButton.nextVisible--;
 	}
+
+/*    if(libCompUpgradeButton.count > 0){
+        libCompUpgradeButton.count--;
+        if(libCompUpgradeButton.count == 0){
+            libraryFlavorText = "";
+            libraryFlavorText.visible = false;
+        }
+    }*/
+    
+
 
 	//handle moving camera with arrow keys
 	if (cursors.up.isDown)
@@ -215,8 +287,16 @@ function checkLibrary(star){
         star.body.velocity.y = 0;
         star.state = "stopLib";
         star.tickCount = 0;
-        console.log(libraryHackButton.nextVisible);
-        if (libraryHackButton.nextVisible === -1 && getRandomInt(1, 5) == 1){
+        // console.log(libraryHackButton.nextVisible);
+        var bonusToHack;
+        if(libHackingLevel <= 6){
+            bonusToHack = (libHackingLevel-1)*100; //0,100,200,300,400,500
+        }
+        else{
+            bonusToHack = 700 - (700/libHackingLevel);
+        }
+        // console.log(bonusToHack);
+        if (libraryHackButton.nextVisible === -1 && getRandomInt(1, 1000)+bonusToHack >= 800){
         	libraryHackButton.nextVisible = 200;
         	libraryHackButton.alpha = 1;
         	libraryHackButton.visible = true;
@@ -255,6 +335,13 @@ function checkCoffee(star){
         star.body.velocity.y = 0;
         star.state = "stopCoff";
         star.tickCount = 0;
+
+        if (coffeeUpgradeButton.visible == false && getRandomInt(1, 1000) >= 950){
+            coffeeHackButton.clickable = true;
+            coffeeHackButton.visible = true;
+            libraryFlavorText.text = "User login detected!";
+            libraryFlavorText.visible = true;
+        }
     }
     if(star.state=="stopCoff"){
         if(star.tickCount > 300){
@@ -337,11 +424,5 @@ function checkKillStar (star) {
 }
 
 
-function purchaseLibCompUpgrade(){
-    if(money < 100*libHackingLevel){
-        money -= 100*libHackingLevel;
-        libHackingLevel += 1;
-    }
-}
 
 };
