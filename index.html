@@ -56,8 +56,8 @@ function create() {
     ground.body.immovable = true;
 
     //  Now let's create two ledges
-    var ledge = platforms.create(400, 300, 'ground');
-    ledge.body.immovable = true;
+    // var ledge = platforms.create(400, 300, 'ground');
+    // ledge.body.immovable = true;
 
     ledge = platforms.create(0, 300, 'ground');
     ledge.body.immovable = true;
@@ -72,7 +72,7 @@ function create() {
     for (var i = 0; i < 12; i++)
     {
         //  Create a star inside of the 'stars' group
-        var star = stars.create(i * 70, 300, 'dude');
+        var star = stars.create(i * 70, 290, 'dude');
 
         //  Let gravity do its thing
         star.body.gravity.x = 300;
