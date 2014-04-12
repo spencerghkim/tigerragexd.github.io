@@ -76,7 +76,9 @@ function create() {
         var star = stars.create(i * 70, 290, 'dude');
 
         //  Let gravity do its thing
-        star.body.gravity.x = 1;
+        star.body.velocity.x = 100;
+
+
 
         //  This just gives each star a slightly random bounce value
         // star.body.bounce.y = 0.7 + Math.random() * 0.2;
