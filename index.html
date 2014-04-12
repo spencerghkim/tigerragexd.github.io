@@ -96,6 +96,7 @@ function create() {
         var starPixel = starPixels.create(i * 60, 295, 'pixel');
         //  Let gravity do its thing
         star.body.velocity.x = 100;
+        starPixels.body.velocity.x = 100;
 
     }
 
@@ -165,7 +166,7 @@ function collectStar (player, star) {
 function killStarPixel (player, starPixel) {
     starPixel.kill();
     var starPixel = starPixels.create( 20, 295, 'pixel');
-    star.body.velocity.x = 100;
+    starPixel.body.velocity.x = 100;
 }
 
 
