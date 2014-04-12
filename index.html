@@ -59,9 +59,13 @@ function create() {
     // var ledge = platforms.create(400, 300, 'ground');
     // ledge.body.immovable = true;
 
-    ledge = platforms.create(0, 300, 'ground');
+    ledge = platforms.create(0, 320, 'ground');
     ledge.scale.setTo(2, 1);
     ledge.body.immovable = true;
+
+	wall = platforms.create(799, 300, 'ground');
+    wall.body.immovable = true;
+
 
     //  Finally some stars to collect
     stars = game.add.group();
@@ -94,7 +98,16 @@ function update() {
     //  Collide the player and the stars with the platforms
     game.physics.arcade.collide(stars, platforms);
 
+    game.physics.arcade.overlap(wall, stars, collectStar, null, this);
+
     
+}
+
+function collectStar (wall, star) {
+    
+    // Removes the star from the screen
+    star.kill();
+
 }
 
 </script>
