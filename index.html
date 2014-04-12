@@ -85,10 +85,10 @@ function create() {
     stars.enableBody = true;
 
     //  Here we'll create 12 of them evenly spaced apart
-    for (var i = 0; i < 60; i++)
+    for (var i = 0; i < 400; i++)
     {
         //  Create a star inside of the 'stars' group
-        var star = stars.create(i * 10 + getRandomInt(1,9), 295+getRandomInt(-2,2), 'star');
+        var star = stars.create(i * (750/400) + getRandomInt(1,9), 295+getRandomInt(-15,15), 'star');
         star.body.velocity.x = 100+getRandomInt(1,10);
         star.state = "right";
 
