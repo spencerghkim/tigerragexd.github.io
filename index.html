@@ -47,7 +47,7 @@ function create() {
     platforms.enableBody = true;
 
     // Here we create the ground.
-    var ground = platforms.create(0, game.world.height - 64, 'ground');
+    var ground = platforms.create(0, game.world.height - 2, 'ground');
 
     //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
     ground.scale.setTo(2, 2);
@@ -56,14 +56,12 @@ function create() {
     ground.body.immovable = true;
 
     //  Now let's create two ledges
-    var ledge = platforms.create(400, 400, 'ground');
-    ledge.body.immovable = true;
-
-    ledge = platforms.create(-150, 250, 'ground');
+    var ledge = platforms.create(0, 300, 'ground');
+    ground.scale.setTo(2, 1);
     ledge.body.immovable = true;
 
     // The player and its settings
-    player = game.add.sprite(790, 290, 'dude');
+    player = game.add.sprite(770, 290, 'dude');
 
     //  We need to enable physics on the player
     game.physics.arcade.enable(player);
