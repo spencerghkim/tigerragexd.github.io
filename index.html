@@ -116,8 +116,8 @@ function update() {
 
     for(var i=0; i<stars.children.length; i++){
 		if(stars.children[i].x == 100){
-			star.body.velocity.x = 0;
-			star.body.velocity.y = 50;
+			stars.children[i].body.velocity.x = 0;
+			stars.children[i].body.velocity.y = 50;
 		}
 	}
 
