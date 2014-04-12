@@ -31,7 +31,6 @@ var platforms;
 var cursors;
 
 var stars;
-var wtf;
 
 function create() {
 
@@ -89,7 +88,8 @@ function create() {
         // star.body.bounce.y = 0.7 + Math.random() * 0.2;
     }
 
-    wtf = stars.create(770, 295, 'star');
+    player = stars.create(770, 295, 'star');
+    player.body.collideWorldBounds = true;
 
     //  Our controls.
     cursors = game.input.keyboard.createCursorKeys();
@@ -103,11 +103,9 @@ function update() {
     //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
     game.physics.arcade.overlap(player, stars, collectStar, null, this);
 
-
-
 }
 
-function collectStar (wtf, star) {
+function collectStar (player, star) {
     
     // Removes the star from the screen
     star.kill();
