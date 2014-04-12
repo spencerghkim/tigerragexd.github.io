@@ -90,6 +90,7 @@ function create() {
         //  Create a star inside of the 'stars' group
         var star = stars.create(i * 10, 295, 'star');
         star.body.velocity.x = 100;
+        star.state = "right";
 
     }
 
@@ -115,19 +116,26 @@ function update() {
 
 
     for(var i=0; i<stars.children.length; i++){
-		if(stars.children[i].x == 100){
+		if(stars.children[i].x == 100 && stars.children[i].state == "right"){
 			goLibrary(stars.children[i]);
+			stars.children[i].state = "down";
 		}
-		if(stars.children[i].y >= 500){
-			var x = getRandomInt(0,1000);
-			if(x > 700){
-				stars.children[i].body.velocity.y = 0;
-			}
-			else if(x > 500){
-				stars.children[i].body.velocity.y = -50;
-			}
-			
+		if(stars.children[i].y >= 500 && stars.children[i].state = "down"){
+			stars.children[i].body.velocity.y = 0;
+			stars.children[i].state = "stop";
+			stars.children[i].tickCount = 0;
+		}
 
+		if(stars.children[i].state=="stop"){
+			if(stars.children[i].tickCount > 200){
+				stars.children[i].body.velocity.y = -50;
+				stars.children[i].state = "up";
+			}
+			stars.children[i].tickCount++;
+		}
+		if(stars.children[i].y >= 400 && stars.children[i].state=="up"){
+			stars.children[i].state=="right";
+			stars.children[i].body.velocity.x = 100;
 		}
 	}
 
