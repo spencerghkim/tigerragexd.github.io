@@ -98,7 +98,7 @@ function update() {
     //  Collide the player and the stars with the platforms
     game.physics.arcade.collide(stars, platforms);
 
-    game.physics.arcade.overlap(wall, stars, collectStar, null, this);
+    game.physics.arcade.collide(wall, stars, collectStar, null, this);
 
     
 }
