@@ -55,10 +55,6 @@ function create() {
     //  This stops it from falling away when you jump on it
     ground.body.immovable = true;
 
-    //  Now let's create two ledges
-    // var ledge = platforms.create(400, 300, 'ground');
-    // ledge.body.immovable = true;
-
     ledge = platforms.create(0, 320, 'ground');
     ledge.scale.setTo(2, 1);
     ledge.body.immovable = true;
@@ -67,51 +63,45 @@ function create() {
     wall.body.immovable = true;
 
     //  Finally some stars to collect
-    stars = game.add.group();
+    players = game.add.group();
 
     //  We will enable physics for any star that is created in this group
-    stars.enableBody = true;
+    players.enableBody = true;
 
     //  Here we'll create 12 of them evenly spaced apart
     for (var i = 0; i < 12; i++)
     {
         //  Create a star inside of the 'stars' group
-        var star = stars.create(i * 50, 290, 'dude');
+        var player = players.create(i * 50, 290, 'dude');
 
         //  Let gravity do its thing
-        star.body.velocity.x = 100;
+        player.body.velocity.x = 100;
 
-
-
-        //  This just gives each star a slightly random bounce value
-        // star.body.bounce.y = 0.7 + Math.random() * 0.2;
     }
 
-    player = stars.create(770, 295, 'star');
-    player.body.collideWorldBounds = true;
+    star = players.create(770, 295, 'star');
+    star.body.collideWorldBounds = true;
 
-    //  Our controls.
-    cursors = game.input.keyboard.createCursorKeys();
     
 }
 
 function update() {
 
     //  Collide the player and the stars with the platforms
-    game.physics.arcade.collide(stars, platforms);
+    game.physics.arcade.collide(players, platforms);
     //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
-    game.physics.arcade.overlap(player, stars, collectStar, null, this);
+    game.physics.arcade.overlap(player, star, collectStar, null, this);
 
 }
 
 function collectStar (player, star) {
     
     // Removes the star from the screen
-    star.kill();
+    player.kill();
 
-    var star = stars.create(60, 100, 'dude');
+    var player = players.create(60, 100, 'dude');
 
-    star.body.velocity.x = 100;
+    player.body.velocity.x = 100;
 
 }
 
