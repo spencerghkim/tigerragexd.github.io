@@ -113,9 +113,12 @@ function update() {
 
     //  Checks to see if the player overlaps with any of the stars, if he does call the killStar function
     game.physics.arcade.overlap(player, stars, killStar, null, this);
-    game.physics.arcade.overlap(libraryPixel, stars, goLibrary, null, this);
+    // game.physics.arcade.overlap(libraryPixel, stars, goLibrary, null, this);
 
-
+    if(star.x == 100){
+    	star.body.velocity.x = 0;
+	    star.body.velocity.y = 50;
+    }
 
 }
 
@@ -128,7 +131,6 @@ function killStar (player, star) {
 
 function goLibrary (libraryPixel, star) {
     if(getRandomInt(0,1000) > 980){
-	    var time = 
 	    star.body.velocity.x = 0;
 	    star.body.velocity.y = 50;
 	}
