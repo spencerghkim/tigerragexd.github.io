@@ -27,8 +27,28 @@ function preload() {
 
 function create() {
 
+
 	game.add.sprite(0, 0, 'star');
-	
+	var platforms;
+
+    //  A simple background for our game
+    game.add.sprite(0, 0, 'sky');
+
+    //  The platforms group contains the ground and the 2 ledges we can jump on
+    platforms = game.add.group();
+
+    //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
+    ground.scale.setTo(2, 2);
+
+    //  Now let's create two ledges
+    var ledge = platforms.create(400, 400, 'ground');
+
+    ledge.body.immovable = true;
+
+    ledge = platforms.create(-150, 250, 'ground');
+
+    ledge.body.immovable = true;
+    
 }
 
 function update() {
