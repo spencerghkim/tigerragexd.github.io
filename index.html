@@ -89,7 +89,7 @@ function create() {
     {
         //  Create a star inside of the 'stars' group
         var star = stars.create(i * 10 + getRandomInt(1,9), 295+getRandomInt(-2,2), 'star');
-        star.body.velocity.x = 100;
+        star.body.velocity.x = 100+getRandomInt(1,10);
         star.state = "right";
 
     }
@@ -144,10 +144,8 @@ function update() {
 }
 
 function killStar (player, star) {
-    //star.kill();
-   // var star = stars.create( 20, 295, 'star');
-   star.x = 20+getRandomInt(1,9);
-    star.body.velocity.x = 100;
+	star.x = 20+getRandomInt(1,9);
+	star.body.velocity.x = 100;
 }
 
 
