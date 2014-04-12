@@ -1,11 +1,11 @@
 
 var textGroup;
-var money = 0; //for demo
+//var money = 0; //for demo
 window.onload = function() {
 
 var game = new Phaser.Game(1280, 720, Phaser.CANVAS, 'phaser-example', { preload: preload, create: create, update: update });
 
-// var money = 0; 
+var money = 0; 
 var moneyText;
 var cursors;
 var stars;
