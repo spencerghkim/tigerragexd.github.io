@@ -61,7 +61,7 @@ function create() {
     ledge.body.immovable = true;
 
     // The player and its settings
-    player = game.add.sprite(770, 290, 'dude');
+    player = game.add.sprite(770, 280, 'dude');
 
     //  We need to enable physics on the player
     game.physics.arcade.enable(player);
@@ -143,6 +143,12 @@ function collectStar (player, star) {
     
     // Removes the star from the screen
     star.kill();
+
+    //  Create a star inside of the 'stars' group
+        var star = stars.create( 60, 295, 'star');
+
+        //  Let gravity do its thing
+        star.body.velocity.x = 100;
 
 }
 
