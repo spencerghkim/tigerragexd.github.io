@@ -88,8 +88,7 @@ function create() {
     for (var i = 0; i < 60; i++)
     {
         //  Create a star inside of the 'stars' group
-        var star = stars.create(i * 10, 295, 'library');
-        //  Let gravity do its thing
+        var star = stars.create(i * 10, 295, 'star');
         star.body.velocity.x = 100;
 
     }
@@ -114,16 +113,16 @@ function update() {
     game.physics.arcade.overlap(player, stars, killStar, null, this);
     // game.physics.arcade.overlap(libraryPixel, stars, goLibrary, null, this);
 
-  /*  if(stars.x == 100){
-    	star.body.velocity.x = 0;
-	    star.body.velocity.y = 50;
-    }*/
+    // if(star.x == 100){
+    // 	star.body.velocity.x = 0;
+	   //  star.body.velocity.y = 50;
+    // }
 
 }
 
 function killStar (player, star) {
     star.kill();
-    var star = stars.create( 20, 295, 'library');
+    var star = stars.create( 20, 295, 'star');
     star.body.velocity.x = 100;
 }
 
