@@ -90,7 +90,7 @@ function create() {
         var star = stars.create(i * (750/400) + getRandomInt(1,9), 295+getRandomInt(-15,15), 'star');
         star.body.velocity.x = 100+getRandomInt(1,10);
         star.state = "right";
-
+        star.mode = "none";
     }
 
     library = game.add.group();
@@ -111,46 +111,73 @@ function update() {
 
     for(var i=0; i<stars.children.length; i++){
 		checkLibrary(stars.children[i]);
+		checkCoffee(stars.children[i]);
 	}
 
 }
 
 function checkLibrary(star){
 	if(star.x == 100 && star.state == "right"){
-		goLibrary(star);
-		star.state = "down";
+		if(getRandomInt(0,1000) > 900){
+		    star.body.velocity.x = 0;
+		    star.body.velocity.y = 50;
+			star.state = "downLib";
+		}
 	}
-	if(star.y >= 500 && star.state == "down"){
+	if(star.y >= 500 && star.state == "downLib"){
 		star.body.velocity.y = 0;
-		star.state = "stop";
+		star.state = "stopLib";
 		star.tickCount = 0;
 	}
-	if(star.state=="stop"){
+	if(star.state=="stopLib"){
 		if(star.tickCount > 200){
 			star.body.velocity.y = -50;
-			star.state = "up";
+			star.state = "upLib";
 		}
 		star.tickCount++;
 	}
-	if(star.y <= 300 && star.state=="up"){
+	if(star.y <= 300 && star.state=="upLib"){
 		star.state="right";
-		star.body.velocity.x = 100;
+		star.body.velocity.x = 100+getRandomInt(1,10);
 		star.body.velocity.y = 0;
+		star.y = 295+getRandomInt(-15,15);
 	}
 }
+
+function checkCoffee(star){
+	if(star.x == 200 && star.state == "right"){
+		if(getRandomInt(0,1000) > 800){
+		    star.body.velocity.x = 0;
+		    star.body.velocity.y = -100;
+			star.state = "upCoff";
+		}
+	}
+	if(star.y <= 200 && star.state == "upCoff"){
+		star.body.velocity.y = 0;
+		star.state = "stopCoff";
+		star.tickCount = 0;
+	}
+	if(star.state=="stopCoff"){
+		if(star.tickCount > 100){
+			star.body.velocity.y = 200;
+			star.state = "downCoff";
+		}
+		star.tickCount++;
+	}
+	if(star.y >= 300 && star.state=="downCoff"){
+		star.state="right";
+		star.body.velocity.x = 100+getRandomInt(1,10);
+		star.body.velocity.y = 0;
+		star.y = 295+getRandomInt(-15,15);
+	}
+}
+
 
 function killStar (player, star) {
 	star.x = 20+getRandomInt(1,9);
 	star.body.velocity.x = 100;
 }
 
-
-function goLibrary (star) {
-    if(getRandomInt(0,1000) > 900){
-	    star.body.velocity.x = 0;
-	    star.body.velocity.y = 50;
-	}
-}
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
