@@ -78,7 +78,7 @@ function create() {
     {
         //  Create a star inside of the 'stars' group
         var star = stars.create(i * (750/400) + getRandomInt(1,9), 295+getRandomInt(-15,15), 'star');
-        star.scale.setTo(.33,.33)
+        star.scale.setTo(.30,.30)
         star.body.velocity.x = 100+getRandomInt(1,10);
         star.state = "right";
         star.mode = "none";
@@ -115,7 +115,7 @@ function checkLibrary(star){
 			star.state = "downLib";
 		}
 	}
-	if(star.y >= 500 && star.state == "downLib"){
+	if(star.y >= 500+getRandomInt(-2,2) && star.state == "downLib"){
 		star.body.velocity.y = 0;
 		star.state = "stopLib";
 		star.tickCount = 0;
@@ -143,7 +143,7 @@ function checkCoffee(star){
 			star.state = "upCoff";
 		}
 	}
-	if(star.y <= 200 && star.state == "upCoff"){
+	if(star.y <= 200+getRandomInt(-2,2) && star.state == "upCoff"){
 		star.body.velocity.y = 0;
 		star.state = "stopCoff";
 		star.tickCount = 0;
@@ -171,7 +171,7 @@ function checkHotel(star){
 			star.state = "downHot";
 		}
 	}
-	if(star.y >= 400 && star.state == "downHot"){
+	if(star.y >= 400+getRandomInt(-2,2) && star.state == "downHot"){
 		star.body.velocity.y = 0;
 		star.state = "stopHot";
 		star.tickCount = 0;
@@ -199,7 +199,7 @@ function checkAirport(star){
 			star.state = "upAir";
 		}
 	}
-	if(star.y <= 120 && star.state == "upAir"){
+	if(star.y <= 120+getRandomInt(-2,2) && star.state == "upAir"){
 		star.body.velocity.y = 0;
 		star.state = "stopAir";
 		star.tickCount = 0;
